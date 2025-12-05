@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosy'Faz - Micro-Crèche à Montigny-lès-Metz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Styles Généraux et PALETTE DU LOGO --- */
+        :root {
+            /* Vert Profond (tiré de l'arc-en-ciel externe et des mains) */
+            --primary: #2F5C55; 
+            /* Fond vert très clair pour les sections */
+            --primary-light: #EBF2F0; 
+            /* Vert Sauge/Gris (tiré de l'arc-en-ciel interne) */
+            --secondary: #8F9E95; 
+            /* Nuance très claire pour alternance */
+            --secondary-light: #F2F5F3; 
+            /* Couleur d'accent (similaire au foncé mais pour les détails) */
+            --accent: #254A44; 
+            /* Fond général effet "papier" comme le logo */
+            --bg-warm: #F9F7F2; 
+            --text: #333333; /* Gris foncé classique pour la lisibilité */
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-warm);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 0;
+            font-weight: 800; /* Police un peu plus grasse pour coller au logo */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background-color: rgba(249, 247, 242, 0.95); /* Couleur papier transparent */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(47, 92, 85, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text::after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(47, 92, 85, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+        }
+        
+        .cta-btn:hover {
+             background-color: var(--secondary);
+             transform: translateY(-2px);
+             box-shadow: 0 6px 15px rgba(143, 158, 149, 0.4);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            /* Dégradé subtil basé sur les couleurs du logo */
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8), rgba(235, 242, 240, 0.8)), url('https://images.unsplash.com/photo-1587654308111-841043047163?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center center;
+            text-align: center;
+            padding: 60px 20px 100px;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* Style spécifique pour le logo rond */
+        .hero-logo {
+            width: 200px;
+            height: 200px;
+            object-fit: contain; /* Garde le ratio du logo */
+            border-radius: 50%; /* Arrondit l'image */
+            border: 5px solid var(--white);
+            box-shadow: 0 8px 20px rgba(47, 92, 85, 0.15);
+            margin-bottom: 20px;
+            background-color: var(--bg-warm); /* Fond papier si l'image a de la transparence */
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* --- Team Section --- */
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--primary-light);
+            background-image: radial-gradient(var(--secondary) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 15px; 
+            justify-items: center;
+            margin-top: 30px;
+        }
+
+        .team-card {
+            background: var(--bg-warm); /* Fond papier */
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(47, 92, 85, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            box-sizing: border-box;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(47, 92, 85, 0.2);
+            border-color: var(--primary);
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 8px auto 12px;
+            object-fit: cover;
+            object-position: top; /* Cadre mieux les visages */
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+
+        .team-card h3 {
+            font-size: 1.1rem;
+            margin: 5px 0 3px;
+            color: var(--primary);
+        }
+        
+        .team-role {
+             color: var(--secondary);
+             font-weight: 700;
+             font-size: 0.8rem;
+             margin-bottom: 10px;
+             display: block;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+        }
+
+        .team-card p {
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        /* --- Projects Section --- */
+        .projects-section {
+            padding: 80px 0;
+            background-color: var(--bg-warm);
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            background: var(--white);
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(47, 92, 85, 0.08);
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .project-item:nth-child(even) {
+            flex-direction: row-reverse;
+            border-bottom-color: var(--primary);
+        }
+
+        .project-icon {
+            font-size: 3.5rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .project-item:nth-child(even) .project-icon {
+             background-color: #E0E8E5; /* Gris vert très clair */
+             color: var(--secondary);
+        }
+
+        .project-item h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* --- Contact Section --- */
+        .contact-section-wrapper {
+            position: relative;
+            padding-top: 50px;
+            background-color: var(--bg-warm);
+        }
+        
+        .wave-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-top svg {
+            position: relative;
+            display: block;
+            width: calc(136% + 1.3px);
+            height: 68px;
+        }
+
+        .wave-top .shape-fill {
+            fill: var(--primary);
+        }
+
+        .contact-section {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 30px 0 80px;
+            text-align: center;
+        }
+
+        .contact-section h2 { 
+            color: var(--white); 
+            font-size: 2.2rem;
+        }
+        
+        .contact-info-box {
+             background: rgba(255,255,255,0.1); 
+             padding: 40px; 
+             border-radius: 30px; 
+             display: inline-block; 
+             text-align: left;
+             margin-top: 30px;
+             border: 2px solid rgba(255,255,255,0.2);
+             backdrop-filter: blur(5px);
+        }
+        
+        .contact-info-box p {
+            margin: 15px 0;
+             color: var(--white);
+             font-size: 1.1rem;
+             display: flex;
+             align-items: center;
+             gap: 10px;
+        }
+
+        footer {
+            background-color: #1A332F; /* Version très sombre du vert logo */
+            color: #ccc;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 1100px) {
+            .team-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            nav ul { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 80px 20px 100px; border-radius: 0 0 30px 30px;}
+            .project-item, .project-item:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            .contact-info-box { width: 90%; padding: 25px;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Cosy'Faz</div>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#equipe">L'Équipe</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="cta-btn">Pré-inscription</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="container">
+            <img src="IMG_7770 2.jpg" alt="Logo Cosy'Faz" class="hero-logo">
+            
+            <h1>Bienvenue dans notre cocon</h1>
+            <p>Cosy'Faz à Montigny-lès-Metz : une micro-crèche où la douceur et la bienveillance font grandir vos enfants.</p>
+            <a href="#equipe" class="cta-btn" style="padding: 15px 30px; font-size: 1.1rem;">Découvrir notre univers</a>
+        </div>
+    </section>
+
+    <section id="equipe" class="team-section">
+        <div class="container">
+            <h2 style="text-align: center;">Notre Équipe de Super-Pros</h2>
+            <p class="section-intro">
+                Une équipe diplômée, stable et passionnée, réunie autour de valeurs communes : le respect du rythme de l'enfant et la sécurité affective.
+            </p>
+
+            <div class="team-grid">
+                
+                <div class="team-card">
+                    <img src="ag.JPG" alt="Anne-Gaëlle" class="avatar">
+                    <h3>Anne-Gaëlle</h3>
+                    <span class="team-role">Gérante & Fondatrice</span>
+                    <p>Le pilier de la crèche. Elle veille à ce que Cosy'Faz soit un véritable prolongement de la maison.</p>
+                </div>
+
+                 <div class="team-card">
+                    <img src="sophie.jpg" alt="Sophie" class="avatar">
+                    <h3>Sophie</h3>
+                    <span class="team-role">EJE (DE) & Adjointe</span>
+                    <p>L'architecte des projets. Elle conçoit des activités qui stimulent l'éveil sans jamais forcer.</p>
+                </div>
+                
+                <div class="team-card">
+                    <img src="cecilia.JPG" alt="Cécilia" class="avatar">
+                    <h3>Cécilia</h3>
+                    <span class="team-role">Auxiliaire de Puériculture</span>
+                    <p>Une patience d'ange. Sa voix douce rassure les plus petits lors des moments de séparation.</p>
+                </div>
+
+                <div class="team-card">
+                    <img src="cathy.JPG" alt="Cathy" class="avatar">
+                    <h3>Cathy</h3>
+                    <span class="team-role">Auxiliaire de Puériculture</span>
+                    <p>Des mains en or pour les soins. Elle transforme le change et le repas en moments d'échange privilégiés.</p>
+                </div>
+
+                <div class="team-card">
+                    <img src="helene.jpg" alt="Hélène" class="avatar">
+                    <h3>Hélène</h3>
+                    <span class="team-role">Professionnelle Petite Enfance</span>
+                    <p>Toujours une idée créative ! Elle adore animer les temps de comptines et de manipulation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets" class="projects-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px;">Nos Piliers Pédagogiques</h2>
+            
+            <div class="project-item">
+                <div class="project-icon">🌿</div>
+                <div>
+                    <h3>Éveil à la Nature en Ville</h3>
+                    <p>Nous faisons entrer la nature à la crèche : observation des saisons, petit potager sur la terrasse et manipulation de matériaux naturels (bois, feuilles, tissus) sont au cœur du quotidien.</p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-icon">👐</div>
+                <div>
+                    <h3>Bébé Signe (Communication Gestuelle)</h3>
+                    <p>Avant de savoir parler, bébé a plein de choses à dire ! Nous utilisons les signes associés à la parole pour l'aider à exprimer ses besoins (manger, dormir, jouer) et réduire les frustrations.</p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-icon">🧸</div>
+                <div>
+                    <h3>Motricité Libre & Confiance</h3>
+                    <p>Ici, pas de transat ni de youpala. Nous laissons l'enfant explorer ses mouvements à son rythme, au sol, sous notre regard bienveillant, pour qu'il gagne en assurance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact-section-wrapper">
+        <div class="wave-top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Rejoignez la famille Cosy'Faz</h2>
+                <p style="color: var(--primary-light); font-size: 1.1rem;">Inscriptions ouvertes selon disponibilités.</p>
+                
+                <div class="contact-info-box">
+                    <p>📍 1 Rue Frédéric Auguste Bartholdi, 57950 Montigny-lès-Metz</p>
+                    <p>📧 contact@cosyfaz.fr</p>
+                    <p>📞 03 87 36 98 64</p>
+                    <p>⏰ Lun - Ven : 7h30 - 18h30</p>
+                </div>
+                <br><br><br>
+                <a href="mailto:contact@cosyfaz.fr" class="cta-btn" style="background-color: var(--accent); color: var(--white); font-size: 1.2rem; padding: 15px 35px;">Demander une place</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Crèche Cosy'Faz Montigny-lès-Metz. Un lieu pensé pour l'enfant.</p>
+    </footer>
+
+</body>
+</html>
